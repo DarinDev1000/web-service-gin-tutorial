@@ -1,6 +1,7 @@
 package main
 
 import (
+	"example/web-service-gin/excel"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,6 +27,8 @@ func main() {
 	router.GET("/albums", getAlbums)
 	router.GET("/albums/:id", getAlbumByID)
 	router.POST("/albums", postAlbums)
+
+	excel.CreateExcelFile()
 
 	router.Run("localhost:8080")
 }
