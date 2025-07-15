@@ -29,6 +29,9 @@ func main() {
 	router.POST("/albums", postAlbums)
 
 	excel.CreateExcelFile()
+	for _, a := range albums {
+		excel.AddAlbum(excel.Album(a))
+	}
 
 	router.Run("localhost:8080")
 }

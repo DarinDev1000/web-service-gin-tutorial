@@ -27,7 +27,7 @@ func CreateExcelFile() {
 		return
 	}
 	// Set Headers
-	f.SetSheetRow("Albums", "A1", &[]interface{}{"ID", "Title", "Artist", "Price"})
+	// f.SetSheetRow("Albums", "A1", &[]interface{}{"ID", "Title", "Artist", "Price"})
 	if err := f.DeleteSheet("Sheet1"); err != nil {
 		fmt.Println(err)
 		return
@@ -45,8 +45,9 @@ func AddAlbum(album Album) {
 		return
 	}
 	// Add Values
-	f.SetSheetRow("Albums")
-	var a Album = Album
+	f.SetSheetRow("Albums", "A"+album.ID, &[]interface{}{album.ID, album.Title, album.Artist, album.Price})
+
+	saveFile(f)
 }
 
 func openFile() (*excelize.File, error) {
