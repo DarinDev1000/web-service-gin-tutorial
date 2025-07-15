@@ -8,7 +8,7 @@ import (
 )
 
 // album represents data about a record album.
-type album struct {
+type Album struct {
 	ID     string  `json:"id"`
 	Title  string  `json:"title"`
 	Artist string  `json:"artist"`
@@ -16,7 +16,7 @@ type album struct {
 }
 
 // albums slice to seed record album data.
-var albums = []album{
+var albums = []Album{
 	{ID: "1", Title: "Blue Train", Artist: "John Coltrane", Price: 56.99},
 	{ID: "2", Title: "Jeru", Artist: "Gerry Mulligan", Price: 17.99},
 	{ID: "3", Title: "Sarah Vaughan and Clifford Brown", Artist: "Sarah Vaughan", Price: 39.99},
@@ -40,14 +40,15 @@ func getAlbums(c *gin.Context) {
 
 // postAlbums adds an album from JSON received in the request body.
 func postAlbums(c *gin.Context) {
-	var newAlbum album
+	var newAlbum Album
 
 	// Call BindJSON to bind the received JSON to
 	// newAlbum.
-	err := c.BindJSON(&newAlbum)
-	if err != nil {
+	if err := c.BindJSON(&newAlbum); err != nil {
 		return
 	}
+
+	excel.AddAlbum(excel.Album(newAlbum))
 
 	// Add the new album to the slice.
 	albums = append(albums, newAlbum)
