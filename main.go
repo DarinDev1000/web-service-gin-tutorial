@@ -40,11 +40,13 @@ func postAlbums(c *gin.Context) {
 
 	// Call BindJSON to bind the received JSON to
 	// newAlbum.
-	if err := c.BindJSON(&newAlbum); err != nil {
+	err := c.BindJSON(&newAlbum)
+	if err != nil {
 		return
 	}
 
 	// Add the new album to the slice.
 	albums = append(albums, newAlbum)
+	// fmt.Printf("Lengh of new albums slice : %d\n", len(albums))
 	c.IndentedJSON(http.StatusCreated, newAlbum)
 }
