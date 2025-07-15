@@ -1,6 +1,7 @@
 package main
 
 import (
+	"example/web-service-gin/duckdb"
 	"example/web-service-gin/excel"
 	"net/http"
 
@@ -32,6 +33,8 @@ func main() {
 	for _, a := range albums {
 		excel.AddAlbum(excel.Album(a))
 	}
+
+	duckdb.ConnectDB()
 
 	router.Run("localhost:8080")
 }
